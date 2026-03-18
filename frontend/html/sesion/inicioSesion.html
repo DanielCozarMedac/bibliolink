@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registro - BiblioLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&amp;family=Merriweather:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      body {
+        font-family: "Merriweather", serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      button,
+      a,
+      input,
+      label,
+      textarea,
+      select {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#F5F6F8] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]"
+  >
+    <div
+      class="relative flex min-h-screen w-full flex-col items-center justify-center group/design-root overflow-x-hidden p-4 sm:p-6 lg:p-8"
+    >
+      <div class="w-full max-w-md">
+        <header class="mb-8 text-center">
+          <a
+            class="inline-flex items-center gap-3 text-2xl font-bold text-[#1E2A38] dark:text-white"
+            href="#"
+          >
+            <span class="material-symbols-outlined !text-4xl text-[#46C4B2]"
+              >import_contacts</span
+            >
+            <span>BiblioLink</span>
+          </a>
+        </header>
+        <main
+          class="bg-white dark:bg-[#283748] rounded-2xl shadow-lg p-8 sm:p-10 w-full"
+        >
+          <div class="text-center">
+            <h1
+              class="text-2xl sm:text-3xl font-bold text-[#1E2A38] dark:text-white"
+            >
+              Crea tu cuenta
+            </h1>
+            <p
+              class="mt-2 text-gray-600 dark:text-gray-400 font-['Merriweather']"
+            >
+              Únete a la comunidad de lectores más grande.
+            </p>
+          </div>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              class="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-300 dark:border-white/20 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+            >
+              <svg
+                class="w-5 h-5"
+                height="48px"
+                viewBox="0 0 48 48"
+                width="48px"
+              >
+                <path
+                  d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                  fill="#fbc02d"
+                ></path>
+                <path
+                  d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                  fill="#e53935"
+                ></path>
+                <path
+                  d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.222,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                  fill="#4caf50"
+                ></path>
+                <path
+                  d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574	l6.19,5.238C39.986,36.63,44,31.023,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                  fill="#1565c0"
+                ></path>
+              </svg>
+              <span class="text-sm font-medium">Registrarse con Google</span>
+            </button>
+            <button
+              class="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-300 dark:border-white/20 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+            >
+              <svg
+                class="w-5 h-5 text-[#1877F2]"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.4V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"
+                ></path>
+              </svg>
+              <span class="text-sm font-medium">Registrarse con Facebook</span>
+            </button>
+          </div>
+          <div class="my-6 flex items-center">
+            <div
+              class="flex-grow border-t border-gray-300 dark:border-white/20"
+            ></div>
+            <span class="mx-4 text-sm text-gray-500 dark:text-gray-400"
+              >O con tu correo electrónico</span
+            >
+            <div
+              class="flex-grow border-t border-gray-300 dark:border-white/20"
+            ></div>
+          </div>
+          <form class="space-y-6">
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                for="username"
+                >Nombre de usuario</label
+              >
+              <input
+                class="w-full rounded-md border-gray-300 dark:border-white/20 dark:bg-white/5 shadow-sm focus:border-[#46C4B2] focus:ring-[#46C4B2] dark:text-white"
+                id="username"
+                name="username"
+                placeholder="Elige un nombre de usuario"
+                required=""
+                type="text"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                for="email"
+                >Correo electrónico</label
+              >
+              <input
+                class="w-full rounded-md border-gray-300 dark:border-white/20 dark:bg-white/5 shadow-sm focus:border-[#46C4B2] focus:ring-[#46C4B2] dark:text-white"
+                id="email"
+                name="email"
+                placeholder="tu@email.com"
+                required=""
+                type="email"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                for="password"
+                >Contraseña</label
+              >
+              <input
+                class="w-full rounded-md border-gray-300 dark:border-white/20 dark:bg-white/5 shadow-sm focus:border-[#46C4B2] focus:ring-[#46C4B2] dark:text-white"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                required=""
+                type="password"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                for="confirm-password"
+                >Confirmar contraseña</label
+              >
+              <input
+                class="w-full rounded-md border-gray-300 dark:border-white/20 dark:bg-white/5 shadow-sm focus:border-[#46C4B2] focus:ring-[#46C4B2] dark:text-white"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="••••••••"
+                required=""
+                type="password"
+              />
+            </div>
+            <div>
+              <button
+                class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#46C4B2] text-white text-base font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors"
+                type="submit"
+              >
+                <span class="truncate">Registrarse</span>
+              </button>
+            </div>
+          </form>
+          <p
+            class="mt-8 text-center text-xs text-gray-500 dark:text-gray-400 font-['Merriweather'] leading-relaxed"
+          >
+            Al registrarte, aceptas nuestros
+            <a class="font-bold text-[#46C4B2] hover:underline" href="#"
+              >Términos de Servicio</a
+            >
+            y
+            <a class="font-bold text-[#46C4B2] hover:underline" href="#"
+              >Política de Privacidad</a
+            >.
+          </p>
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              ¿Ya tienes una cuenta?
+              <a class="font-bold text-[#46C4B2] hover:underline" href="#"
+                >Inicia sesión</a
+              >
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

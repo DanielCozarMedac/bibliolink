@@ -3,7 +3,7 @@
 $_servidor = "localhost";
 $_usuario = "MEDAC";
 $_contrasena = "MEDAC";
-$_bd = "intercambio_bd";
+$_bd = "intercambios_bd";
 
 //Me conecto al server
 

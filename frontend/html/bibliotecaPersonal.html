@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mi Biblioteca - BiblioLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#1152d4",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d121b] dark:text-[#f8f9fc]">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5 sm:px-4 md:px-10 lg:px-20 xl:px-40">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7ebf3] dark:border-b-[#1f2937] px-4 sm:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path>
+</svg>
+</div>
+<h2 class="text-[#0d121b] dark:text-[#f8f9fc] text-lg font-bold leading-tight tracking-[-0.015em]">BiblioLink</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full">
+<div class="text-[#4c669a] flex border-none bg-[#e7ebf3] dark:bg-[#1f2937] items-center justify-center pl-4 rounded-l-full border-r-0">
+<span class="material-symbols-outlined text-base">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-[#0d121b] dark:text-[#f8f9fc] focus:outline-0 focus:ring-0 border-none bg-[#e7ebf3] dark:bg-[#1f2937] focus:border-none h-full placeholder:text-[#4c669a] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-2 sm:gap-4">
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#e7ebf3] dark:bg-[#1f2937] text-[#0d121b] dark:text-[#f8f9fc] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#e7ebf3] dark:bg-[#1f2937] text-[#0d121b] dark:text-[#f8f9fc] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture, abstract purple and blue gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjXtKXa96FAWzoXUL5SFc9pf_qWEvFqgZKdtPnx9gwtXFfhEPCZ7GJQ3lIgnIPELcEMJcLjrL5y01RJUJzZs5xEdpMOf6sycRCA4Kq2qcIOSWcEV82lHtXl3g2o7nag8B9YUw_qfWec6iIbfB7WqyigNp7oQHUuChGKjlwds-e00EPJRG7ldFfEA7VjFoVx44z4X-zhVpKn4IFpmXqsxB3nLb9ev0vf1xEaGBhC8bfStRkbW8dF4YDt_0tHO2iddv19uii3dR3dnn6");'></div>
+</div>
+</header>
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-3 p-4 mt-6">
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Mi Biblioteca</p>
+</div>
+<!-- Chips -->
+<div class="flex gap-2 p-3 overflow-x-auto">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 dark:bg-primary/30 pl-4 pr-4">
+<p class="text-primary dark:text-[#f8f9fc] text-sm font-medium leading-normal">Todos (120)</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7ebf3] dark:bg-[#1f2937] pl-4 pr-4">
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-sm font-medium leading-normal">Leído (65)</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7ebf3] dark:bg-[#1f2937] pl-4 pr-4">
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-sm font-medium leading-normal">Leyendo (5)</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7ebf3] dark:bg-[#1f2937] pl-4 pr-4">
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-sm font-medium leading-normal">Quiero Leer (40)</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e7ebf3] dark:bg-[#1f2937] pl-4 pr-4">
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-sm font-medium leading-normal">Abandonado (10)</p>
+</button>
+</div>
+<!-- ToolBar -->
+<div class="flex justify-between items-center gap-2 px-4 py-3 border-b border-solid border-b-[#e7ebf3] dark:border-b-[#1f2937]">
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-primary/20 dark:bg-primary/30 text-primary dark:text-[#f8f9fc]">
+<span class="material-symbols-outlined text-lg">grid_view</span>
+</button>
+<button class="p-2 rounded-full text-[#4c669a] dark:text-[#a0aec0] hover:bg-[#e7ebf3] dark:hover:bg-[#1f2937]">
+<span class="material-symbols-outlined text-lg">list</span>
+</button>
+<button class="p-2 rounded-full text-[#4c669a] dark:text-[#a0aec0] hover:bg-[#e7ebf3] dark:hover:bg-[#1f2937]">
+<span class="material-symbols-outlined text-lg">sort</span>
+</button>
+</div>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-primary text-[#f8f9fc] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-4">
+<span class="material-symbols-outlined fill text-lg">add</span>
+<span class="truncate">Añadir Libro</span>
+</button>
+</div>
+<!-- ImageGrid (Book Grid) -->
+<div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-x-4 gap-y-6 p-4">
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of Elantris" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBu5wIhheS6pkFKb0-mB_bsK06ywg_GtrTSYWkJSEkZSq7Wa_PKAGIG7EjQ_SEinKtULJ0dp5P8LADYuOeAm7rgKmRQS_jsEteLGIyC6SVAlJ001qJFAncSQ0HlOvgAfTI7vgtqcNAS9_5m-nC46vod50yhfcgrIAbYJDB77_a-Vun5jc3ug8MziLp-gYfswoB0elol2_aalpQ45Iq6oJr9RAmA0ad-els3XpQiFHIqKhv-kUM1Dawardod7duplFB7RvVQEYsNvX7m");'></div>
+<div class="absolute top-2 right-2 flex flex-col gap-2">
+<div class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-1.5 rounded-full text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined text-lg">cached</span>
+</div>
+</div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">Elantris</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined text-base">star_half</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of El imperio final" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqfmJ72Vct-c7pG7ajIUSsNgYqVNcbOwyVPow0E43zhk13-WkizgaRt-ROYAs-6rfv5jspJiruIdd00q2tXNeg71QHJ4MqR-ie26KYCty3-YSMQG-y8aZPu1R2vKFVgPEet9E7VxbMNYUHje5EZsNimdcKbmoCAkKM4eHk-AhygP6WAd50qLQIBtAFVIx-BzXSqA112GmBykANBzoCYyNeJKCCvgrYTBhCWA4prfDszMcY8L0Yfda0v3P99Dz6U0IABvLlcwhFiTDl");'></div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">El imperio final</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of El pozo de la ascensión" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdZrsIPih86Z6WiaummX-999Koy2inGvy552Sa5hz9KJ868lVAbsX6ioILlno_joBuXkFETlVvI1TzoMUuXMWme27qsjaN5QbnDd2L5lksozii24WUrjfSu9-CT63_xQ0X9UhZa-I1IvcAcMg3i4xHiuxdJt5KwY9SHilWLQ8MNwfKAY7_Skw0u9KrSTHP6TI1BansTHQztS9OPiUJJ0xKemqHvdBRtGzyozRrjvuebvpfx18c_SMrWfjWUO_r_NKTOt4B8xqhfCeA");'></div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">El pozo de la ascensión</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of El héroe de las eras" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHkpEkGK61QIkxvv0e3WMGMHBUIXu5slL345rp-v2pa0wZVs1S4qXrg8lXu-PMKbyBi5YmsbhFNEl7XXe8TdGHRDqLgZbph3C6SGQb4jX1-PmuyqpcgvOZC4kBtv0RxhbiqO1FRcgwYc0hw_5vvTsmAYwk80RQQXt06nnbw2zpuB-cAEVtVQ03aq90Q6f2z2DogIcyYmYavRySccYZQrlFfFopHluwqU5Qg8d-VeajSsvScJLLUD1h9ifWCkPvqzWvtgxSFqJhLMN1");'></div>
+<div class="absolute top-2 right-2 flex flex-col gap-2">
+<div class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-1.5 rounded-full text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined text-lg">card_giftcard</span>
+</div>
+</div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">El héroe de las eras</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of Aleación de ley" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSQt7xf-WEi04uSi-NjwP-k-aCDSr7fTblqZCKiBVYmq3F7iS47gfgyjdJ3y_Xka-s3Ir6LuCwOynFrey5lIEB3mW2ZCK-gS51IyaJGsD7nm76OxxuEWeo1Z93eot-ocJSLKU0SzyCd25PM9N5jeX9nJmGvHamGFxsjz-HwwErZHb9z6p4kHQi5reuOoAShO66kqI94Vi1A1taOBiFDzzpqqPVuyVKAXSuTQphJjYYRuow6eaZu75bhQ7XCT2gs_PO5JPaTiYkAKPZ");'></div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">Aleación de ley</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-[#4c669a] dark:text-[#a0aec0]">
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of Sombras de identidad" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbjpx-FScCqKaEEMlF0ib0mlgf8lBYV_Em3MpDEMJQfDqoClNhWnx8lUg94XAsLflH1V6Y68fwwyXmIGThQ1YTOlBR73AzyVo64_PPVVjjqTsRamjfP0Vr4IUjPvFFXWRNsJEutTSnitRS_nBM9SKUscOH0MYrQbLjQwnhaZBwK-lGedkYbmdGzR-SECRn2IQjvi0Kp9scCC1_Q0TNN3L8EU_wr2dGo5DyY14kp5mbpoTODH7eTOEwhookmGBIYbvs6zsmMmuL53_w");'></div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">Sombras de identidad</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of Brazales de duelo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAc9MavAECg0f6Pi_rsQtMsBSCvvnhrQq3iFyKO_PTjIkFQMvTXjW2qLzruXHefsyEmlCfxHKKx7JyHG7dMpjyIf_jq16H6B17OtXz-9nNoMsYNC-PZv-WdzvNnzcEdIm2EXa3-3kAuTSiC7m0PXiQoJEhMFENR0Z9GfSZRNyR3WHoWijYw4RFNJWXGcbKDZr-95TIVRfAelu4VUWtoyCXI9uI6JbdujEc3GpoMqdl13EQdqFtDEqIAEe2LTjJO9-QPUZVrZIqcjSPI");'></div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">Brazales de duelo</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 group relative">
+<div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-lg" data-alt="Book cover of El camino de los reyes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmDfxv62WPS-J34ISAKIFAAJA4O7GNeQnMmabROQyvG_Uxgb7AzUjEbMV_JgfPJYTiMr6Fw5Pk6bk-rPQnnr_i4gueMmQRrLwz9DObVXSjPOgp83VGCs9xifxrW0BSEuhXJ0lBGZU_I2KDmrwyKCFyeSvqOlytqp7HAp9GGV7kHwPU3kQR4EKzIBpzVAjoDsnex5qn09qpSM6H2W-a92BI9au3RDcZoQvxwTJKCScOb2RHOQjQtukTIHKEI8FjCYPlJNXfsJVPK1iH");'></div>
+<div class="absolute top-2 right-2 flex flex-col gap-2">
+<div class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-1.5 rounded-full text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined text-lg">cached</span>
+</div>
+<div class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-1.5 rounded-full text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined text-lg">card_giftcard</span>
+</div>
+</div>
+<div>
+<p class="text-[#0d121b] dark:text-[#f8f9fc] text-base font-bold leading-normal">El camino de los reyes</p>
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Brandon Sanderson</p>
+<div class="flex items-center gap-1 mt-1 text-primary dark:text-[#88D498]">
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+<span class="material-symbols-outlined fill text-base">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

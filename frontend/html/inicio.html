@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Inicio BiblioLink</title>
+<title>BiblioLink - Tu biblioteca más personal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -12,12 +13,12 @@
         body {
             font-family: 'Merriweather', serif;
         }
-        h1, h2, h3, h4, h5, h6, button, a, input, label, textarea, select {
+        h1, h2, h3, h4, h5, h6, button, a {
             font-family: 'Poppins', sans-serif;
         }
-</style>
+    </style>
 </head>
-<body class="bg-[#F5F6F8] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
+<body class="bg-[#FFFFFF] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
     <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
     <div class="w-full flex flex-1 justify-center">
@@ -45,49 +46,130 @@
             </button>
         </div>
     </header>
-    <main class="w-full flex-grow px-4 sm:px-10 py-8">
-        <div class="text-center mb-8">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#1E2A38] dark:text-white">Encuentra tu próxima lectura</h1>
-        <p class="mt-2 text-lg text-gray-600 dark:text-gray-400 font-['Merriweather']">Explora los libros que hay disponibles ya sea oficial o para intercambios con otros usuarios.</p>
+<!-- HeroSection -->
+    <main class="w-full">
+        <div class="py-16 sm:py-24 px-4 @container">
+        <div class="min-h-[480px] flex flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-8 text-center" data-alt="Diverse group of people happily sharing books" style='background-image: linear-gradient(rgba(30, 42, 56, 0.5) 0%, rgba(30, 42, 56, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3ZIjZ5DSUcMEkR7RM2E04Wb2YHByJlzW6JOo3RopHynN-OQIJvQGakbW6TPSJuZcoPuz8oS9cXILNrTeXPtMJfNzixISua5OQSDQturbYGmGyb9gZ1NrkgnF1JJR7JmQ0ZBlP2W4jdZpKaBqYM6TEwOIaFxV2ikNLhXTG8CE3yiw2k_FHekRwUfvnxTVhDg0VEV7uQUkYsHnYDGcYU9qH5OsCUy-zrsD0wZrYySGjTSAD1ZxmtBSR6g1mmtpcVuD-xmjVNeD0LLYl");'>
+        <div class="flex flex-col gap-4 max-w-2xl">
+            <h1 class="text-white text-4xl font-black leading-tight tracking-tighter sm:text-6xl">Tu biblioteca más personal</h1>
+            <h2 class="text-[#F5F6F8] text-base font-normal leading-relaxed font-['Merriweather'] sm:text-lg">Conecta, comparte y descubre libros con una comunidad de lectores apasionados como tú.</h2>
         </div>
-        <div class="bg-white dark:bg-[#1E2A38] p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-white/10 mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-        <div class="relative">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="search-book">Buscar libro</label>
-        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 mt-3">search</span>
-        <input class="w-full h-11 pl-10 pr-4 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="search-book" placeholder="Título, autor..." type="search"/>
-        </div>
-        <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="genre">Género</label>
-        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="genre">
-            <option>Todos los géneros</option>
-            <option>Fantasía</option>
-            <option>Ciencia Ficción</option>
-            <option>Misterio</option>
-            <option>Novela Histórica</option>
-        </select>
-        </div>
-        <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="condition">Condición</label>
-        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="condition">
-            <option>Cualquier condición</option>
-            <option>Como nuevo</option>
-            <option>Buen estado</option>
-            <option>Aceptable</option>
-        </select>
-        </div>
-        <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="offer-type">Tipo de oferta</label>
-        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="offer-type">
-            <option>Intercambio o Regalo</option>
-            <option>Solo Intercambio</option>
-            <option>Solo Regalo</option>
-        </select>
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#46C4B2] text-white text-base font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors mt-4">
+        <span class="truncate">Crea tu biblioteca</span>
+        </button>
         </div>
         </div>
-        </div>
-        <h2>No hay ningún libro publicado todavía</h2>
+        <!-- FeatureSection -->
+        <section class="flex flex-col gap-10 px-4 py-16 sm:py-20 @container bg-[#F5F6F8] dark:bg-transparent">
+            <div class="flex flex-col gap-4 text-center items-center">
+                <h2 class="text-[#1E2A38] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl max-w-2xl">Descubre todo lo que BiblioLink te ofrece</h2>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-base font-normal leading-relaxed max-w-3xl">Hemos creado las herramientas perfectas para que organices tu lectura, conectes con otros y encuentres tu próxima gran aventura literaria.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-0 max-w-6xl mx-auto">
+            <div class="flex flex-1 gap-4 rounded-lg bg-white dark:bg-[#1E2A38] p-6 flex-col border border-transparent dark:border-white/10">
+            <div class="text-[#46C4B2]">
+            <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-[#1E2A38] dark:text-white text-lg font-bold leading-tight">Crea tu biblioteca personal</h3>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed">Organiza, califica y lleva un registro de todos los libros que has leído y los que deseas leer.</p>
+            </div>
+            </div>
+            <div class="flex flex-1 gap-4 rounded-lg bg-white dark:bg-[#1E2A38] p-6 flex-col border border-transparent dark:border-white/10">
+            <div class="text-[#46C4B2]">
+            <span class="material-symbols-outlined !text-3xl">swap_horiz</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-[#1E2A38] dark:text-white text-lg font-bold leading-tight">Intercambia y regala libros</h3>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed">Dale una segunda vida a tus libros encontrando usuarios locales para intercambios presenciales.</p>
+            </div>
+            </div>
+            <div class="flex flex-1 gap-4 rounded-lg bg-white dark:bg-[#1E2A38] p-6 flex-col border border-transparent dark:border-white/10">
+            <div class="text-[#46C4B2]">
+            <span class="material-symbols-outlined !text-3xl">groups</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-[#1E2A38] dark:text-white text-lg font-bold leading-tight">Conecta con lectores cercanos</h3>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed">Únete a clubes de lectura, asiste a eventos y haz nuevos amigos con tus mismos gustos literarios.</p>
+            </div>
+            </div>
+            <div class="flex flex-1 gap-4 rounded-lg bg-white dark:bg-[#1E2A38] p-6 flex-col border border-transparent dark:border-white/10">
+            <div class="text-[#46C4B2]">
+            <span class="material-symbols-outlined !text-3xl">auto_awesome</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <h3 class="text-[#1E2A38] dark:text-white text-lg font-bold leading-tight">Reseñas y recomendaciones por IA</h3>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed">Nuestro sistema inteligente te ayuda a descubrir tu próxima lectura basándose en tus gustos.</p>
+            </div>
+            </div>
+            </div>
+        </section>
+        <!-- Testimonials Section -->
+        <section class="px-4 py-16 sm:py-20 w-full">
+            <h2 class="text-[#1E2A38] dark:text-white text-3xl font-bold leading-tight tracking-tight text-center pb-12 sm:text-4xl">Lo que dicen nuestros lectores</h2>
+            <div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+            <div class="flex items-stretch p-4 gap-8 w-full">
+            <div class="flex h-full flex-1 flex-col gap-4 text-center rounded-lg min-w-72 pt-4 bg-[#F5F6F8] dark:bg-[#1E2A38]/50 p-6">
+            <img class="bg-center bg-no-repeat aspect-square bg-cover rounded-full flex flex-col self-center w-20 h-20" data-alt="Avatar of Ana García" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoUit5eJ_BQ5OeYevsG1ZM5BEOFSer58R4fRIGWgaFLxWb8frhONhyDrJNEP3kA6kcVBZpukphOZpR7kydhrqdm8zEmaC1D9V08hGQBWyovUdDyfmhV7sUdI5BE7ne6ZnJW2p2tVUWRS2a5W74O5s9A-w21OTusTZ2HJ0kgD6v2C7vafW_k04lYrZMnIwiQ8gBRE9ejjtKGhwDtjYrEAWLksxFLB7cRRkGaKoVTfSK8A8NmMrG44ALh6wQES4SaBsTMLg2zYKfbDvQ"/>
+            <div>
+                <p class="text-[#1E2A38] dark:text-white text-base font-bold leading-normal">Ana García</p>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed mt-2">"¡Increíble! He conocido a gente maravillosa y he descubierto libros que nunca habría encontrado por mi cuenta. BiblioLink ha reavivado mi amor por la lectura."</p>
+            </div>
+            </div>
+            <div class="flex h-full flex-1 flex-col gap-4 text-center rounded-lg min-w-72 pt-4 bg-[#F5F6F8] dark:bg-[#1E2A38]/50 p-6">
+            <img class="bg-center bg-no-repeat aspect-square bg-cover rounded-full flex flex-col self-center w-20 h-20" data-alt="Avatar of Carlos Mendoza" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu5rmuSf9ZjodhVl0LJ3sRgOIHbFViGy9YczN3wF9zH1Lfxgo1GG7w89K3XTiUhcN1Q0-gboO7NNMTaGKyDV2hQ57rJYD7zQtyUQQZIm6iTxVa2uQeMW9FN3g6gOvUON0ChR12o3Echr2f4jcJz1iuqfmT91GevDhN2_VgEnmNJ68T04qeo1kOeUiGiqTZHUmkAHHnNEy7SIFC-rjWvyzDZPEtN359HQGJPQMGHDT77llgHJ_r_GMgJMTjmTZjqmh_WLetk1ePBCP2"/>
+            <div>
+                <p class="text-[#1E2A38] dark:text-white text-base font-bold leading-normal">Carlos Mendoza</p>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed mt-2">"La función de intercambio es genial. He podido conseguir libros que estaban en mi lista de deseos simplemente intercambiando los que ya había leído. 100% recomendado."</p>
+            </div>
+            </div>
+            <div class="flex h-full flex-1 flex-col gap-4 text-center rounded-lg min-w-72 pt-4 bg-[#F5F6F8] dark:bg-[#1E2A38]/50 p-6">
+            <img class="bg-center bg-no-repeat aspect-square bg-cover rounded-full flex flex-col self-center w-20 h-20" data-alt="Avatar of Laura Jiménez" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLK8ajAbzmXLZIs8SMOyqljFBx0UDzEC6RFYAzVEIbt1qDqK4MLYE-pwEmtnGaHC9OqxATn7awEKisRnW_jynu286zxUM6trqblfSu7HEGVlYMJ1vXGL4LpcG_m7xRbQb3923RqkFt6IFxETFscUaE00GMm6s6YkO4Bn0DqD8Dal1X_r0R6jPVItfpZcOQYbn4eU_p_Gy5MtGI41nlEFkxyfbpsBKyS-Hv7EwkVR5H87HgDqm1XXPuHN9q1-yyGzloq8R-T__VcP_R"/>
+            <div>
+                <p class="text-[#1E2A38] dark:text-white text-base font-bold leading-normal">Laura Jiménez</p>
+                <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm font-normal leading-relaxed mt-2">"Me encanta tener toda mi biblioteca organizada en un solo lugar. La interfaz es súper limpia y fácil de usar. ¡Una app imprescindible para cualquier lector!"</p>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+        <!-- Pricing Section -->
+        <section class="px-4 py-16 sm:py-20 w-full bg-[#F5F6F8] dark:bg-transparent">
+            <div class="flex flex-col gap-4 text-center items-center max-w-2xl mx-auto">
+            <h2 class="text-[#1E2A38] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl">Elige el plan perfecto para ti</h2>
+            <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-base font-normal leading-relaxed">Comienza gratis y explora nuestras funciones básicas, o desbloquea todo el potencial de BiblioLink con nuestro plan Premium.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12">
+        <!-- Free Plan -->
+            <div class="flex flex-col p-8 rounded-lg border border-gray-200 dark:border-white/20 bg-white dark:bg-[#1E2A38]">
+            <h3 class="text-2xl font-bold text-[#1E2A38] dark:text-white">Gratuito</h3>
+            <p class="text-4xl font-black text-[#1E2A38] dark:text-white my-4">$0<span class="text-base font-medium">/mes</span></p>
+            <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm h-12">Perfecto para empezar a organizar tu biblioteca y conectar con la comunidad.</p>
+            <ul class="space-y-3 mt-6 text-[#1E2A38]/80 dark:text-[#F5F6F8]/80">
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Biblioteca personal de hasta 100 libros</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Participación en foros</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Hasta 5 intercambios al mes</li>
+            </ul>
+            <button class="w-full mt-8 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-transparent text-[#46C4B2] border-2 border-[#46C4B2] text-base font-bold leading-normal tracking-wide hover:bg-[#46C4B2]/10 transition-colors">Empezar gratis</button>
+            </div>
+        <!-- Premium Plan -->
+            <div class="flex flex-col p-8 rounded-lg border-2 border-[#46C4B2] bg-white dark:bg-[#1E2A38] relative">
+            <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#46C4B2] text-white px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider">Más Popular</div>
+            <h3 class="text-2xl font-bold text-[#1E2A38] dark:text-white">Premium</h3>
+            <p class="text-4xl font-black text-[#1E2A38] dark:text-white my-4">$9.99<span class="text-base font-medium">/mes</span></p>
+            <p class="text-[#1E2A38]/80 dark:text-[#F5F6F8]/80 text-sm h-12">Desbloquea funciones exclusivas y lleva tu experiencia de lectura al siguiente nivel.</p>
+            <ul class="space-y-3 mt-6 text-[#1E2A38]/80 dark:text-[#F5F6F8]/80">
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Biblioteca personal ilimitada</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Intercambios ilimitados</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Recomendaciones avanzadas por IA</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-[#46C4B2]">check_circle</span>Acceso prioritario a eventos</li>
+            </ul>
+            <button class="w-full mt-8 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-[#46C4B2] text-white text-base font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors">Hazte Premium</button>
+            </div>
+            </div>
+        </section>
     </main>
+    <!-- Footer -->
     <footer class="bg-[#1E2A38] text-white w-full">
         <div class="max-w-6xl mx-auto px-4 sm:px-10 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="md:col-span-1">

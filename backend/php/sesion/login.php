@@ -56,7 +56,7 @@
     <div class="container mt-5"> 
         <div class="row justify-content-center"> 
             <div class="col-md-6 col-lg-4">
-                <h1 class="text-center mb-4">Iniciar sesión :D</h1> 
+                <h1 class="text-center mb-4">Iniciar sesión</h1> 
                 <form action="" method="post">
                     <div class="mb-3">
                         <label class="form-label">Correo</label>

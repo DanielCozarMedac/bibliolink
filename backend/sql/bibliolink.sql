@@ -2,11 +2,11 @@
 DROP USER IF EXISTS 'MEDAC'@'localhost';
 
 -- Eliminar base de datos si existe
-DROP SCHEMA IF EXISTS series_bd;
+DROP SCHEMA IF EXISTS intercambios_bd;
 
 -- SOLO SI NO ESTÁ CREADO
 CREATE USER 'MEDAC'@'localhost' IDENTIFIED BY 'MEDAC';
-GRANT ALL PRIVILEGES ON series_bd.* TO 'MEDAC'@'localhost';
+GRANT ALL PRIVILEGES ON intercambios_bd.* TO 'MEDAC'@'localhost';
 FLUSH PRIVILEGES;
 
 -- Crear base de datos

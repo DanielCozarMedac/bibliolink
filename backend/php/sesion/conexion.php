@@ -1,8 +1,8 @@
 <?php
 
 $_servidor = "localhost";
-$_usuario = "MEDAC";
-$_contrasena = "MEDAC";
+$_usuario = "root";
+$_contrasena = "";
 $_bd = "intercambios_bd";
 
 //Me conecto al server

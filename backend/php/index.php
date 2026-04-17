@@ -31,6 +31,11 @@ $resultado = $_conexion->query($consulta);
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
             <span class="navbar-brand">Bibliolink 📚</span>
+            <div>
+                <button onclick="window.location.href='buscarLibros.php'">
+                    Buscar
+                </button>
+            </div>
             <div class="d-flex">
                 <span class="text-white me-3">Bienvenido, <?php echo $_SESSION["correo"]; ?></span>
                 <a href="perfil.php" class="btn btn-outline-info btn-sm me-2">Mi Perfil</a> <a href="sesion/logout.php" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>>

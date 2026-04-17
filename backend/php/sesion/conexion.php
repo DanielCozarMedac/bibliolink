@@ -1,9 +1,11 @@
 <?php
 
-$_servidor = "localhost";
-$_usuario = "root";
-$_contrasena = "";
-$_bd = "intercambios_bd";
+$env = parse_ini_file('.env');
+
+$_servidor = $env['DB_HOST'];
+$_bd = $env['DB_NAME'];
+$_usuario = $env['DB_USER'];
+$_contrasena = $env['DB_PASS'];
 
 //Me conecto al server
 

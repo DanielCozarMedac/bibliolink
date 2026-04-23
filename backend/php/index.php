@@ -19,28 +19,35 @@ $resultado = $_conexion->query($consulta);
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Bibliolink - Panel Principal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
             <span class="navbar-brand">Bibliolink 📚</span>
+            <div>
+                <button onclick="window.location.href='buscarLibros.php'">
+                    Buscar
+                </button>
+            </div>
             <div class="d-flex">
                 <span class="text-white me-3">Bienvenido, <?php echo $_SESSION["correo"]; ?></span>
-                <a href="sesion/logout.php" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
+                <a href="perfil.php" class="btn btn-outline-info btn-sm me-2">Mi Perfil</a> <a href="sesion/logout.php" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <h2 class="mb-4">Libros Disponibles</h2>
-        
+
         <div class="row">
-            <?php while($libro = $resultado->fetch_assoc()): ?>
+            <?php while ($libro = $resultado->fetch_assoc()): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
@@ -62,4 +69,5 @@ $resultado = $_conexion->query($consulta);
     </div>
 
 </body>
+
 </html>

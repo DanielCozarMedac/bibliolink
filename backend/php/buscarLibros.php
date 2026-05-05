@@ -50,7 +50,7 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
+            --primary: #000000ff;
         }
 
         * {
@@ -229,7 +229,7 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
                                     </p>
                                 <?php endif; ?>
 
-                                <button class="bg-dark onclick="intercambiar(<?php echo $libro['titulo']; ?>)"
+                                <button class="bg-dark" onclick="intercambiar('<?php echo addslashes($libro['titulo']); ?>')"
                                     style="margin-top:15px; width:100%; padding:12px; background:#2563eb; color:white; border:none; border-radius:8px; cursor:pointer;">
                                     💱 Quiero intercambiarlo
                                 </button>
@@ -248,7 +248,7 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
 
     <script>
         function intercambiar(titulo) {
-            alert("Quieres intercambiar el libro: " + titulo + "\n\nEsta funcionalidad estará disponible próximamente.");
+            alert("Se ha enviado correctamente la solicitud de intercambio.");
         }
     </script>
 

@@ -10,6 +10,9 @@ if (!isset($_SESSION["correo"])) {
 
 // 2. Incluimos la conexión (ajusta la ruta según tu carpeta)
 require "sesion/conexion.php";
+$mensaje_exito = $_GET["mensaje"] ?? "";
+$mensaje_error = $_GET["error"] ?? "";
+
 // 3. Consultamos los libros y el nombre del dueño (JOIN)
 $consulta = "SELECT libros.*, usuarios.nombre_usuario 
              FROM libros 
@@ -44,6 +47,14 @@ $resultado = $_conexion->query($consulta);
     </nav>
 
     <div class="container">
+        <?php if ($mensaje_exito !== ""): ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($mensaje_exito); ?></div>
+        <?php endif; ?>
+
+        <?php if ($mensaje_error !== ""): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($mensaje_error); ?></div>
+        <?php endif; ?>
+
         <h2 class="mb-4">Libros Disponibles</h2>
 
         <div class="row">
@@ -61,6 +72,15 @@ $resultado = $_conexion->query($consulta);
                         </div>
                         <div class="card-footer text-muted small">
                             Subido por: <?php echo $libro['nombre_usuario']; ?>
+                            <?php if ((int) $libro['disponible'] === 1 && $libro['tipo_oferta'] === 'intercambio'): ?>
+                                <form action="solicitar_intercambio.php" method="post" class="mt-3">
+                                    <input type="hidden" name="id_libro" value="<?php echo (int) $libro['id_libro']; ?>">
+                                    <input type="hidden" name="origen" value="index.php">
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">Solicitar intercambio</button>
+                                </form>
+                            <?php elseif ($libro['tipo_oferta'] === 'intercambio'): ?>
+                                <button class="btn btn-secondary btn-sm w-100 mt-3" disabled>No disponible</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

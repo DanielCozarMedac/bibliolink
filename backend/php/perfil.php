@@ -9,6 +9,8 @@ if (!isset($_SESSION["correo"])) {
 
 require "sesion/conexion.php";
 $correo_sesion = $_SESSION["correo"];
+$mensaje_url = $_GET["mensaje"] ?? "";
+$error_url = $_GET["error"] ?? "";
 
 // 2. Obtener datos actuales del usuario
 $sql = "SELECT * FROM usuarios WHERE email = '$correo_sesion'";
@@ -42,6 +44,39 @@ $id_usuario_actual = $usuario['id_usuario'];
 // 5. Consultar SOLO los libros que pertenecen a este usuario
 $sql_mis_libros = "SELECT * FROM libros WHERE id_usuario = '$id_usuario_actual'";
 $mis_libros = $_conexion->query($sql_mis_libros);
+
+// 6. Consultar solicitudes de intercambio recibidas para los libros del usuario
+$sql_solicitudes_recibidas = "SELECT intercambios.id_intercambio,
+                                     intercambios.fecha,
+                                     intercambios.estado,
+                                     libros.titulo,
+                                     usuarios.nombre_usuario,
+                                     usuarios.email
+                              FROM intercambios
+                              JOIN libros ON intercambios.id_libro = libros.id_libro
+                              JOIN usuarios ON intercambios.id_usuario_interesado = usuarios.id_usuario
+                              WHERE libros.id_usuario = '$id_usuario_actual'
+                              ORDER BY intercambios.fecha DESC, intercambios.id_intercambio DESC";
+$solicitudes_recibidas = $_conexion->query($sql_solicitudes_recibidas);
+
+// 7. Consultar historial de solicitudes enviadas por el usuario
+$sql_solicitudes_enviadas = "SELECT intercambios.fecha,
+                                    intercambios.estado,
+                                    libros.titulo,
+                                    usuarios.nombre_usuario AS propietario
+                             FROM intercambios
+                             JOIN libros ON intercambios.id_libro = libros.id_libro
+                             JOIN usuarios ON libros.id_usuario = usuarios.id_usuario
+                             WHERE intercambios.id_usuario_interesado = '$id_usuario_actual'
+                             ORDER BY intercambios.fecha DESC, intercambios.id_intercambio DESC";
+$solicitudes_enviadas = $_conexion->query($sql_solicitudes_enviadas);
+
+// 8. Consultar notificaciones del usuario
+$sql_notificaciones = "SELECT mensaje, fecha, leida
+                       FROM notificaciones
+                       WHERE id_usuario_destino = '$id_usuario_actual'
+                       ORDER BY fecha DESC, id_notificacion DESC";
+$notificaciones = $_conexion->query($sql_notificaciones);
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +99,14 @@ $mis_libros = $_conexion->query($sql_mis_libros);
     </nav>
 
     <div class="container">
+        <?php if($mensaje_url !== ""): ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($mensaje_url); ?></div>
+        <?php endif; ?>
+
+        <?php if($error_url !== ""): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($error_url); ?></div>
+        <?php endif; ?>
+
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
@@ -157,6 +200,143 @@ $mis_libros = $_conexion->query($sql_mis_libros);
 </table>
     </div>
 </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-10">
+                <h3 class="mb-3">Solicitudes de intercambio recibidas</h3>
+
+                <table class="table table-hover bg-white shadow-sm rounded">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Libro</th>
+                            <th>Solicitante</th>
+                            <th>Email</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($solicitudes_recibidas->num_rows > 0): ?>
+                            <?php while($solicitud = $solicitudes_recibidas->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($solicitud['titulo']); ?></td>
+                                    <td><?php echo htmlspecialchars($solicitud['nombre_usuario']); ?></td>
+                                    <td><?php echo htmlspecialchars($solicitud['email']); ?></td>
+                                    <td><?php echo htmlspecialchars($solicitud['fecha']); ?></td>
+                                    <td>
+                                        <?php if($solicitud['estado'] == 'pendiente'): ?>
+                                            <span class="badge bg-warning text-dark">Pendiente</span>
+                                        <?php elseif($solicitud['estado'] == 'aceptado'): ?>
+                                            <span class="badge bg-success">Aceptado</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-danger">Rechazado</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if($solicitud['estado'] == 'pendiente'): ?>
+                                            <div class="d-flex gap-2">
+                                                <form action="gestionar_intercambio.php" method="post">
+                                                    <input type="hidden" name="id_intercambio" value="<?php echo (int) $solicitud['id_intercambio']; ?>">
+                                                    <input type="hidden" name="accion" value="aceptar">
+                                                    <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
+                                                </form>
+                                                <form action="gestionar_intercambio.php" method="post">
+                                                    <input type="hidden" name="id_intercambio" value="<?php echo (int) $solicitud['id_intercambio']; ?>">
+                                                    <input type="hidden" name="accion" value="rechazar">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                                                </form>
+                                            </div>
+                                        <?php else: ?>
+                                            <span class="text-muted">Gestionada</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="text-center">Todavia no has recibido solicitudes de intercambio.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-10">
+                <h3 class="mb-3">Historial de mis solicitudes enviadas</h3>
+
+                <table class="table table-hover bg-white shadow-sm rounded">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Libro</th>
+                            <th>Propietario</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($solicitudes_enviadas->num_rows > 0): ?>
+                            <?php while($solicitud_enviada = $solicitudes_enviadas->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($solicitud_enviada['titulo']); ?></td>
+                                    <td><?php echo htmlspecialchars($solicitud_enviada['propietario']); ?></td>
+                                    <td><?php echo htmlspecialchars($solicitud_enviada['fecha']); ?></td>
+                                    <td>
+                                        <?php if($solicitud_enviada['estado'] == 'pendiente'): ?>
+                                            <span class="badge bg-warning text-dark">Pendiente</span>
+                                        <?php elseif($solicitud_enviada['estado'] == 'aceptado'): ?>
+                                            <span class="badge bg-success">Aceptado</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-danger">Rechazado</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="text-center">Todavia no has enviado solicitudes de intercambio.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-md-10">
+                <h3 class="mb-3">Notificaciones</h3>
+
+                <table class="table table-hover bg-white shadow-sm rounded">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Mensaje</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($notificaciones->num_rows > 0): ?>
+                            <?php while($notificacion = $notificaciones->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($notificacion['mensaje']); ?></td>
+                                    <td><?php echo htmlspecialchars($notificacion['fecha']); ?></td>
+                                    <td>
+                                        <?php if((int) $notificacion['leida'] === 1): ?>
+                                            <span class="badge bg-secondary">Leida</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-primary">Nueva</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3" class="text-center">No tienes notificaciones.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 </body>

@@ -7,6 +7,8 @@ require "sesion/conexion.php";
 $libros = [];
 $mensaje = '';
 $titulo_buscado = '';
+$mensaje_exito = $_GET['mensaje'] ?? '';
+$mensaje_error = $_GET['error'] ?? '';
 
 if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
 
@@ -190,6 +192,13 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
         Volver
     </button>
     <div class="container">
+        <?php if ($mensaje_exito !== ''): ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($mensaje_exito); ?></div>
+        <?php endif; ?>
+
+        <?php if ($mensaje_error !== ''): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($mensaje_error); ?></div>
+        <?php endif; ?>
 
         <div class="search-box">
             <form method="GET" class="search-form">
@@ -218,8 +227,8 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
                                 <?php endif; ?>
 
                                 <p>
-                                    <span class="estado <?php echo $libro['disponible'] === 'disponible' ? 'disponible' : 'intercambiado'; ?>">
-                                        <?php echo $libro['disponible'] === 'disponible' ? '✅ Disponible' : '🔄 Intercambiado'; ?>
+                                    <span class="estado <?php echo (int) $libro['disponible'] === 1 ? 'disponible' : 'intercambiado'; ?>">
+                                        <?php echo (int) $libro['disponible'] === 1 ? '✅ Disponible' : '🔄 Intercambiado'; ?>
                                     </span>
                                 </p>
 
@@ -229,10 +238,22 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
                                     </p>
                                 <?php endif; ?>
 
-                                <button class="bg-dark" onclick="intercambiar('<?php echo addslashes($libro['titulo']); ?>')"
-                                    style="margin-top:15px; width:100%; padding:12px; background:#2563eb; color:white; border:none; border-radius:8px; cursor:pointer;">
-                                    💱 Quiero intercambiarlo
-                                </button>
+                                <?php if ((int) $libro['disponible'] === 1 && $libro['tipo_oferta'] === 'intercambio'): ?>
+                                    <form action="solicitar_intercambio.php" method="post">
+                                        <input type="hidden" name="id_libro" value="<?php echo (int) $libro['id_libro']; ?>">
+                                        <input type="hidden" name="origen" value="buscarLibros.php">
+                                        <input type="hidden" name="titulo" value="<?php echo htmlspecialchars($titulo_buscado); ?>">
+                                        <button class="bg-dark" type="submit"
+                                            style="margin-top:15px; width:100%; padding:12px; background:#2563eb; color:white; border:none; border-radius:8px; cursor:pointer;">
+                                            💱 Quiero intercambiarlo
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <button class="bg-secondary" disabled
+                                        style="margin-top:15px; width:100%; padding:12px; color:white; border:none; border-radius:8px;">
+                                        No disponible para intercambio
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -245,12 +266,6 @@ if (isset($_GET['titulo']) && trim($_GET['titulo']) !== '') {
         <?php endif; ?>
 
     </div>
-
-    <script>
-        function intercambiar(titulo) {
-            alert("Se ha enviado correctamente la solicitud de intercambio.");
-        }
-    </script>
 
 </body>
 

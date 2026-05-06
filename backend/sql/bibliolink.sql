@@ -49,6 +49,21 @@ CREATE TABLE intercambios (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE notificaciones (
+    id_notificacion INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario_destino INT NOT NULL,
+    id_intercambio INT NOT NULL,
+    mensaje VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    leida BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (id_usuario_destino) REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (id_intercambio) REFERENCES intercambios(id_intercambio)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
 -- Insertar usuarios
 INSERT INTO usuarios (nombre_usuario, email, contrasena, tipo_suscripcion) VALUES
 ('Carlos Ruiz', 'carlos@email.com', 'pass123', 'gratuita'),
@@ -75,3 +90,8 @@ INSERT INTO intercambios (id_libro, id_usuario_interesado, fecha, estado) VALUES
 (6, 5, '2026-02-10', 'rechazado'),
 (1, 2, '2026-02-12', 'pendiente'),
 (3, 4, '2026-02-15', 'aceptado');
+
+INSERT INTO notificaciones (id_usuario_destino, id_intercambio, mensaje, fecha, leida) VALUES
+(2, 1, 'Carlos Ruiz ha solicitado intercambiar El SeÃ±or de los Anillos.', '2026-02-01 10:00:00', FALSE),
+(4, 2, 'Miguel Torres ha solicitado intercambiar Don Quijote de la Mancha.', '2026-02-05 11:30:00', TRUE),
+(1, 3, 'David LÃ³pez ha solicitado intercambiar Harry Potter y la Piedra Filosofal.', '2026-02-10 16:45:00', TRUE);

@@ -9,13 +9,15 @@ RUN apt-get update && apt-get install -y \
 # 2. Copiamos todo tu repositorio al servidor
 COPY . /var/www/html/
 
-# 3. Movemos los archivos de backend (incluido tu index.php) a la raíz
-RUN cp -r /var/www/html/backend/php/* /var/www/html/ || true
+# 3. Movemos los archivos de backend y frontend a la raíz principal
+RUN cp -r /var/www/html/backend/php/* /var/www/html/ || true \
+    && cp -r /var/www/html/frontend/html/* /var/www/html/ || true
 
-# 4. Movemos también los archivos de frontend a la raíz
-RUN cp -r /var/www/html/frontend/html/* /var/www/html/ || true
-
-# 5. Ajustamos permisos de lectura
+# 4. Ajustamos los permisos de lectura
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
+# 5. FORZAMOS A APACHE A QUEDARSE ENCENDIDO Y ESCUCHANDO
+CMD ["apache2-foreground"]
+
 
 

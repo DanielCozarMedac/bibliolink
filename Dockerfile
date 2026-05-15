@@ -18,3 +18,4 @@ RUN cp -r /var/www/html/frontend/html/* /var/www/html/ || true
 # 5. Ajustamos permisos de lectura
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
+

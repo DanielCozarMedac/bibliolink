@@ -1,13 +1,12 @@
 FROM php:8.2-apache
 
-# 1. Copiamos todo el contenido de tus carpetas al servidor
-COPY ./frontend/html/ /var/www/html/
-COPY ./backend/php/ /var/www/html/
+# 1. Instala y activa las extensiones oficiales de MySQL en el servidor
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli
 
-# 2. Corregimos los permisos de los archivos para que Apache pueda leerlos
-RUN chown -W www-data:www-data /var/www/html/* && chmod -R 755 /var/www/html
+# 2. Copia todo tu repositorio a la carpeta del servidor
+COPY . /var/www/html/
 
-# 3. Forzamos a Apache a permitir el acceso al directorio raíz
+# 3. Mantenemos la configuración de acceso a los directorios
 RUN echo "<Directory /var/www/html/>" >> /etc/apache2/apache2.conf \
     && echo "    Options Indexes FollowSymLinks" >> /etc/apache2/apache2.conf \
     && echo "    AllowOverride All" >> /etc/apache2/apache2.conf \

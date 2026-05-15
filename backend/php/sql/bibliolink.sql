@@ -1,3 +1,4 @@
+@@ -0,0 +1,97 @@
 -- Eliminar usuario si existe
 DROP USER IF EXISTS 'MEDAC'@'localhost';
 

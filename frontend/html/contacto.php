@@ -1,3 +1,15 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
 <!DOCTYPE html>
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
@@ -30,16 +42,17 @@
 <h2 class="text-xl font-bold leading-tight tracking-tight">BiblioLink</h2>
 </div>
 <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
-<a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="#">Inicio</a>
-<a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="#">Comunidad</a>
-<a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="#">Intercambios</a>
-<a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="#">Premium</a>
-<a class="text-sm font-bold leading-normal text-[#46C4B2] transition-colors" href="#">Contacto</a>
-</div>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="inicio.php">Inicio</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.php">Comunidad</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="../../backend/php/index.php">Intercambios</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="chat.php">Chats</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.php">Suscripciones</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.php">Contacto</a>
+        </div>
 <div class="flex items-center gap-4">
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#46C4B2] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors">
-<span class="truncate">Registrarse</span>
-</button>
+    <a href="../../backend/php/perfil.php" class="flex items-center justify-center gap-2 rounded-full border border-[#46C4B2] px-5 py-2 text-sm font-medium hover:bg-[#46C4B2] hover:text-white transition-colors">
+        Mi Perfil
+    </a>
 </div>
 </header>
 <main class="w-full flex-grow">

@@ -27,10 +27,10 @@ if (isset($_GET["id"])) {
     
     if ($_conexion->query($sql_borrar)) {
         // Redirigimos al perfil con un mensaje de éxito (opcional)
-        header("location: perfil.php?mensaje=eliminado");
+        header("location: perfil.php?mensaje=Libro eliminado correctamente");
     } else {
         // Si hay error, volvemos con aviso de error
-        header("location: perfil.php?error=no_borrado");
+        header("location: perfil.php");
     }
 } else {
     // Si alguien intenta entrar a este archivo sin un ID, lo mandamos al perfil

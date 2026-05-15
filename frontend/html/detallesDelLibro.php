@@ -1,3 +1,15 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
 <!DOCTYPE html>
 <html class="dark" lang="es">
   <head>

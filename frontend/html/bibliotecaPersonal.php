@@ -1,3 +1,15 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
 <!DOCTYPE html>
 
 <html class="light" lang="es">
@@ -74,11 +86,11 @@
                 </div>
                 
                 <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
-                      <a class="text-sm font-bold leading-normal text-[#46C4B2] transition-colors" href="inicio.html">Inicio</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.html">Comunidad</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="intercambios.html">Intercambios</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.html">Suscripciones</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.html">Contacto</a>
+                      <a class="text-sm font-bold leading-normal text-[#46C4B2] transition-colors" href="inicio.php">Inicio</a>
+                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.php">Comunidad</a>
+                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="../../backend/php/index.php">Intercambios</a>
+                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.php">Suscripciones</a>
+                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.php">Contacto</a>
                 </div>
               </div>
               <div class="flex flex-1 justify-end gap-2 sm:gap-4">

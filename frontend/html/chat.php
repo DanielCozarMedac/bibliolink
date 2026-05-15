@@ -1,5 +1,16 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
 <!DOCTYPE html>
-
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -13,34 +24,37 @@
         body {
             font-family: 'Merriweather', serif;
         }
-        h1, h2, h3, h4, h5, h6, button, a {
+        h1, h2, h3, h4, h5, h6, button, a, input, label, textarea {
             font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
-<body class="bg-[#FFFFFF] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
+<body class="bg-[#F5F6F8] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
     <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-    <div class="layout-container flex h-full grow flex-col">
+    <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
     <div class="w-full flex flex-1 justify-center">
-    <div class="layout-content-container flex flex-col w-full max-w-6xl">
+    <div class="layout-content-container flex flex-col w-full">
     <header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-4 border-b border-solid border-[#E0E2E7] dark:border-[#1E2A38]/50 bg-white dark:bg-[#1E2A38]">
-        <div class="flex items-center gap-8">
-                <div class="flex items-center gap-4 text-primary">
-                  <div class="text-[#46C4B2] w-8 h-8 flex items-center justify-center">
-                    <span class="material-symbols-outlined !text-3xl">import_contacts</span>
-                  </div>
-                  <h2 class="text-xl font-bold leading-tight tracking-tight">BiblioLink</h2>
-                </div>
-                
-                <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="inicio.html">Inicio</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.html">Comunidad</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="intercambios.html">Intercambios</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.html">Suscripciones</a>
-                      <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.html">Contacto</a>
-                </div>
-              </div>
-              <div class="flex flex-1 justify-end gap-2 sm:gap-4">
+        <div class="flex items-center gap-4 text-[#1E2A38] dark:text-white">
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
+        <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+        </div>
+        <h2 class="text-xl font-bold leading-tight tracking-tight">BiblioLink</h2>
+        </div>
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="inicio.php">Inicio</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.php">Comunidad</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="../../backend/php/index.php">Intercambios</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="chat.php">Chats</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.php">Suscripciones</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.php">Contacto</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../../backend/php/perfil.php" class="flex items-center justify-center gap-2 rounded-full border border-[#46C4B2] px-5 py-2 text-sm font-medium hover:bg-[#46C4B2] hover:text-white transition-colors">
+                Mi Perfil
+            </a>
+        </div>
+             <!-- <div class="display: none; flex flex-1 justify-end gap-2 sm:gap-4">
                 <div class="flex gap-2">
                   <button
                     class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#e7ebf3] dark:bg-[#1f2937] text-[#0d121b] dark:text-[#f8f9fc] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
@@ -64,11 +78,11 @@
                     background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCjXtKXa96FAWzoXUL5SFc9pf_qWEvFqgZKdtPnx9gwtXFfhEPCZ7GJQ3lIgnIPELcEMJcLjrL5y01RJUJzZs5xEdpMOf6sycRCA4Kq2qcIOSWcEV82lHtXl3g2o7nag8B9YUw_qfWec6iIbfB7WqyigNp7oQHUuChGKjlwds-e00EPJRG7ldFfEA7VjFoVx44z4X-zhVpKn4IFpmXqsxB3nLb9ev0vf1xEaGBhC8bfStRkbW8dF4YDt_0tHO2iddv19uii3dR3dnn6');
                   "
                 ></div>
-              </div>
+              </div> -->
     </header>
 <!-- HeroSection -->
     <main class="w-full">
-        <div class="w-full max-w-2xl flex flex-col" style="height: 75vh; min-height: 480px;">
+        <div class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-4 border-b border-solid border-[#E0E2E7] dark:border-[#1E2A38]/50 bg-white dark:bg-[#1E2A38]" style="height: 75vh; min-height: 480px;">
  
             <!-- Chat Header -->
             <div class="flex items-center gap-3 px-5 py-4 bg-white dark:bg-[#253447] border border-[#E0E2E7] dark:border-[#1E2A38]/60 rounded-t-2xl shadow-sm">

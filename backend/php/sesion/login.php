@@ -1,83 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliolink</title>
-    <?php
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-        require "conexion.php";
-    ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-<body>
-  <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $tmp_correo = $_POST["correo"];
-        $tmp_contrasena = $_POST["contrasena"];
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
-        // Validación de campos vacíos
-        if($tmp_contrasena == "") $err_contrasena = "Introduce una contraseña";
-        else $contrasena = $tmp_contrasena;
+require "conexion.php";
 
-        if($tmp_correo == "") $err_correo = "Introduce un correo";
-        else $correo = $tmp_correo;
+$error_general = "";
 
-        if(isset($correo) && isset($contrasena)){
-            $consulta = "SELECT * FROM usuarios WHERE email = '$correo'";
-            $resultado = $_conexion -> query($consulta);
+// Procesar formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $tmp_correo = trim($_POST["correo"] ?? '');
+    $tmp_contrasena = $_POST["contrasena"] ?? '';
 
-            if($resultado -> num_rows === 0){
-                echo "<div class='alert alert-danger'>El correo no existe en la base de datos</div>";
+    if (empty($tmp_correo)) {
+        $error_general = "Por favor ingresa tu correo electrónico.";
+    } elseif (empty($tmp_contrasena)) {
+        $error_general = "Por favor ingresa tu contraseña.";
+    } else {
+        $consulta = "SELECT * FROM usuarios WHERE email = '$tmp_correo'";
+        $resultado = $_conexion->query($consulta);
+
+        if ($resultado->num_rows === 0) {
+            $error_general = "El correo electrónico no está registrado.";
+        } else {
+            $user_info = $resultado->fetch_assoc();
+
+            if (!password_verify($tmp_contrasena, $user_info["contrasena"])) {
+                $error_general = "Contraseña incorrecta.";
             } else {
-                $user_info = $resultado -> fetch_assoc();
-                
-                // password_verify descifra el hash de la BD y lo compara con lo que escribió el usuario
-               if(!password_verify($contrasena, $user_info["contrasena"])){
-                $nombre = $user_info["nombre_usuario"];
-                echo "<div class='alert alert-danger'>Contraseña incorrecta para el usuario $nombre</div>";
-                } else {
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
+                // Login exitoso
+                $_SESSION["correo"] = $tmp_correo;
+                $_SESSION["admin"] = $user_info["tipo_suscripcion"] ?? 'gratuita';
 
-                    $_SESSION["correo"] = $correo;
-                    // Asegúrate de que la columna 'tipo_suscripcion' o 'admin' exista en tu SQL
-                    $_SESSION["admin"] = $user_info["tipo_suscripcion"]; 
-
-                    header("location:../index.php");
-                    exit();
-                }
+                header("location: ../../../frontend/html/inicio.php");
+                exit();
             }
         }
     }
+}
 ?>
-    <div class="container mt-5"> 
-        <div class="row justify-content-center"> 
-            <div class="col-md-6 col-lg-4">
-                <h1 class="text-center mb-4">Iniciar sesión</h1> 
-                <form action="" method="post">
-                    <div class="mb-3">
-                        <label class="form-label">Correo</label>
-                        <input type="text" name="correo" class="form-control">
-                        <?php if(isset($err_correo)) echo "<div class = 'alert alert-danger'>$err_correo</div>"; ?>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" name="contrasena" class="form-control">
-                        <?php if(isset($err_contrasena)) echo "<div class = 'alert alert-danger'>$err_contrasena</div>"; ?>
-                    </div>
 
-                    <div class="mb-3">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-primary w-100">
-                    </div>
-                </form>
-                <h5 class="text-center mt-4  mb-3">Si no tienes cuenta, registrate aquí</h5>
-                <a href="signup.php" class="btn btn-secondary w-100">Registrarse</a>
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Iniciar Sesión - BiblioLink</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Merriweather', serif;
+        }
+        h1, h2, h3, h4, h5, h6, button, a, input, label {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-[#F5F6F8] dark:bg-[#1E2A38] min-h-screen flex items-center justify-center">
+
+<div class="max-w-md w-full mx-auto px-6 py-12">
+    
+    <!-- Logo y Título -->
+    <img src="../../../img/bibliolink.png" alt="No image">
+
+    <div class="bg-white dark:bg-[#1E2A38] rounded-3xl shadow-xl border border-gray-100 dark:border-white/10 p-8">
+        
+        <h2 class="text-2xl font-bold text-center mb-8">Iniciar Sesión</h2>
+
+        <?php if (!empty($error_general)): ?>
+            <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-5 py-4 rounded-2xl text-sm">
+                <?= htmlspecialchars($error_general) ?>
             </div>
+        <?php endif; ?>
+
+        <form action="" method="post" class="space-y-6">
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Correo Electrónico</label>
+                <input type="email" name="correo" 
+                       class="w-full h-12 px-5 rounded-2xl border border-gray-200 dark:border-white/20 bg-white dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-all"
+                       placeholder="tu@email.com" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contraseña</label>
+                <input type="password" name="contrasena" 
+                       class="w-full h-12 px-5 rounded-2xl border border-gray-200 dark:border-white/20 bg-white dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-all"
+                       placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-[#46C4B2] hover:bg-[#3da999] transition-colors text-white font-semibold py-4 rounded-2xl text-lg mt-4">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-600 dark:text-gray-400">
+                ¿No tienes cuenta? 
+                <a href="signup.php" class="text-[#46C4B2] hover:underline font-medium">Regístrate aquí</a>
+            </p>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <div class="text-center mt-8">
+        <a href="../index.php" class="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+            ← Volver al inicio
+        </a>
+    </div>
+</div>
+
 </body>
 </html>

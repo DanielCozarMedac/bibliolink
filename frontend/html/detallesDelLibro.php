@@ -1,0 +1,420 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
+<!DOCTYPE html>
+<html class="dark" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Detalles del Libro - BiblioLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-dark": "#0B192F",
+              "accent": "#88D498",
+              "background-light": "#FFFFFF",
+              "background-dark": "#0B192F",
+              "gray-soft": "#F0F2F5",
+              "text-light": "#0B192F",
+              "text-dark": "#FFFFFF",
+              "text-muted": "#9CA3AF",
+            },
+            fontFamily: {
+              display: ["Poppins", "sans-serif"],
+              body: ["Merriweather", "serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "1rem",
+              xl: "1.5rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      .material-symbols-outlined.fill {
+        font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .font-body {
+        font-family: "Merriweather", serif;
+      }
+    </style>
+  </head>
+  <body class="bg-background-dark text-text-dark">
+    <div
+      class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <div
+          class="flex flex-1 justify-center py-5 sm:px-4 md:px-10 lg:px-20 xl:px-40"
+        >
+          <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+            <header
+              class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-4 sm:px-6 py-3"
+            >
+              <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-white">
+                  <span class="material-symbols-outlined text-3xl text-accent"
+                    >auto_stories</span
+                  >
+                  <h1 class="text-xl font-bold">BiblioLink</h1>
+                </div>
+              </div>
+
+              <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                  <div
+                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                  >
+                    <span class="material-symbols-outlined text-gray-400"
+                      >search</span
+                    >
+                  </div>
+                  <input
+                    class="form-input w-full pl-10 pr-4 py-2 rounded-full bg-[#162338] text-white border-transparent focus:border-accent focus:ring-accent placeholder:text-gray-400"
+                    placeholder="Buscar libros, autores, usuarios..."
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div class="flex flex-1 justify-end gap-2 sm:gap-4">
+                <div class="flex gap-2">
+                  <button
+                    class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-[#162338] text-white hover:bg-[#1d2c45]"
+                  >
+                    <span class="material-symbols-outlined text-xl"
+                      >notifications</span
+                    >
+                  </button>
+                  <button
+                    class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-[#162338] text-white hover:bg-[#1d2c45]"
+                  >
+                    <span class="material-symbols-outlined text-xl"
+                      >chat_bubble</span
+                    >
+                  </button>
+                </div>
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjXtKXa96FAWzoXUL5SFc9pf_qWEvFqgZKdtPnx9gwtXFfhEPCZ7GJQ3lIgnIPELcEMJcLjrL5y01RJUJzZs5xEdpMOf6sycRCA4Kq2qcIOSWcEV82lHtXl3g2o7nag8B9YUw_qfWec6iIbfB7WqyigNp7oQHUuChGKjlwds-e00EPJRG7ldFfEA7VjFoVx44z4X-zhVpKn4IFpmXqsxB3nLb9ev0vf1xEaGBhC8bfStRkbW8dF4YDt_0tHO2iddv19uii3dR3dnn6");'
+                ></div>
+              </div>
+            </header>
+
+            <main class="flex-grow p-4 sm:p-6 md:p-8">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 flex flex-col items-center">
+                  <div
+                    class="w-full max-w-xs bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg shadow-2xl mb-6"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmDfxv62WPS-J34ISAKIFAAJA4O7GNeQnMmabROQyvG_Uxgb7AzUjEbMV_JgfPJYTiMr6Fw5Pk6bk-rPQnnr_i4gueMmQRrLwz9DObVXSjPOgp83VGCs9xifxrW0BSEuhXJ0lBGZU_I2KDmrwyKCFyeSvqOlytqp7HAp9GGV7kHwPU3kQR4EKzIBpzVAjoDsnex5qn09qpSM6H2W-a92BI9au3RDcZoQvxwTJKCScOb2RHOQjQtukTIHKEI8FjCYPlJNXfsJVPK1iH");'
+                  ></div>
+
+                  <div class="w-full max-w-xs space-y-4">
+                    <select
+                      class="form-select w-full rounded-full bg-accent text-primary-dark font-bold border-0 py-3 text-center appearance-none"
+                    >
+                      <option>Leído</option>
+                      <option>Leyendo</option>
+                      <option>Quiero Leer</option>
+                      <option>Abandonado</option>
+                    </select>
+
+                    <div
+                      class="flex justify-around items-center bg-[#162338] p-2 rounded-full"
+                    >
+                      <button
+                        class="flex flex-col items-center text-gray-400 hover:text-accent p-2 rounded-lg transition-colors"
+                      >
+                        <span class="material-symbols-outlined">cached</span>
+                        <span class="text-xs font-medium">Intercambio</span>
+                      </button>
+                      <button
+                        class="flex flex-col items-center text-accent p-2 rounded-lg transition-colors"
+                      >
+                        <span class="material-symbols-outlined fill"
+                          >card_giftcard</span
+                        >
+                        <span class="text-xs font-medium">Regalo</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                  <h2 class="text-4xl font-bold font-display tracking-tight">
+                    El camino de los reyes
+                  </h2>
+                  <p class="text-xl font-medium text-gray-300 mt-1">
+                    por Brandon Sanderson
+                  </p>
+
+                  <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-gray-400">
+                    <span class="font-medium"
+                      >Género: <span class="font-normal">Fantasía Épica</span></span
+                    >
+                    <span class="font-medium"
+                      >Editorial: <span class="font-normal">Nova</span></span
+                    >
+                    <span class="font-medium"
+                      >Publicación: <span class="font-normal">2010</span></span
+                    >
+                  </div>
+
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-center gap-4 mt-6 border-y border-white/10 py-4"
+                  >
+                    <div class="flex-1">
+                      <p class="text-sm font-semibold">Calificación de la comunidad</p>
+                      <div class="flex items-center gap-2">
+                        <div class="flex items-center text-accent">
+                          <span class="material-symbols-outlined fill text-2xl"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-2xl"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-2xl"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-2xl"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined text-2xl"
+                            >star_half</span
+                          >
+                        </div>
+                        <span class="text-lg font-bold">4.8</span>
+                        <span class="text-gray-400 text-sm">(12,456 votos)</span>
+                      </div>
+                    </div>
+
+                    <div class="flex-1">
+                      <p class="text-sm font-semibold">Tu calificación</p>
+                      <div class="flex items-center text-gray-500">
+                        <span
+                          class="material-symbols-outlined text-2xl cursor-pointer hover:text-accent"
+                          >star</span
+                        >
+                        <span
+                          class="material-symbols-outlined text-2xl cursor-pointer hover:text-accent"
+                          >star</span
+                        >
+                        <span
+                          class="material-symbols-outlined text-2xl cursor-pointer hover:text-accent"
+                          >star</span
+                        >
+                        <span
+                          class="material-symbols-outlined text-2xl cursor-pointer hover:text-accent"
+                          >star</span
+                        >
+                        <span
+                          class="material-symbols-outlined text-2xl cursor-pointer hover:text-accent"
+                          >star</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-6">
+                    <h3 class="text-xl font-bold font-display">Sinopsis</h3>
+                    <p class="font-body text-base text-gray-300 mt-2 leading-relaxed">
+                      En Roshar, un mundo de piedra y tormentas, extrañas tempestades de
+                      increíble poder barren el rocoso terreno de tal manera que han dado
+                      forma a una nueva civilización escondida. Han pasado siglos desde la
+                      caída de las diez órdenes consagradas conocidas como los Caballeros
+                      Radiantes, pero sus Espadas y Armaduras Santas, las hojas esquirladas,
+                      aún permanecen. Hombres de toda clase las codician. En medio de esta
+                      tierra devastada por la guerra, un esclavo llamado Kaladin lucha por
+                      su vida...
+                    </p>
+                  </div>
+
+                  <div class="mt-8">
+                    <h3 class="text-xl font-bold font-display mb-4">Escribe tu reseña</h3>
+                    <textarea
+                      class="form-textarea w-full rounded-lg bg-[#162338] text-white border-transparent focus:border-accent focus:ring-accent placeholder:text-gray-400"
+                      placeholder="Comparte tus pensamientos sobre el libro..."
+                      rows="4"
+                    ></textarea>
+                    <button
+                      class="mt-2 flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-accent text-primary-dark gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-6"
+                    >
+                      Publicar Reseña
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-12">
+                <h3
+                  class="text-2xl font-bold font-display border-b border-white/10 pb-2 mb-6"
+                >
+                  Reseñas de la Comunidad
+                </h3>
+                <div class="space-y-6">
+                  <article class="p-4 bg-[#162338] rounded-lg">
+                    <div class="flex items-center gap-3 mb-2">
+                      <img
+                        alt="Ana García"
+                        class="w-10 h-10 rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAb6lr8bHG0Ga7RqZWjPJ2p0MZi5Ub7BOd5bAUdqQbsEccujWLz9Ag-OSLrc6WYq-RnSULbUo6yvKNari8j1TdaYefBs1eyJR9oSy3_7uT--aai18YcrYfkIUhtu_IDxqnoRChSAE7X9zRrAePxhZmNB01o-4Vizl-VlsL_4nB6yCRvja6Fe_50ApAaV3JgXQiTxgQDcj9zFHigtyf_5b3FpGwArwpuzDUYGo8vxwsb1x4QdObWRINBHL0Sgz6KKEtEW9ibHgPoJlp"
+                      />
+                      <div>
+                        <p class="font-semibold">Ana García</p>
+                        <div class="flex items-center text-accent">
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <p class="font-body text-sm text-gray-300 leading-relaxed">
+                      Una obra maestra de la fantasía moderna. La construcción del mundo es
+                      increíble y los personajes son complejos y memorables. ¡No pude dejar
+                      de leerlo!
+                    </p>
+                  </article>
+
+                  <article class="p-4 bg-[#162338] rounded-lg">
+                    <div class="flex items-center gap-3 mb-2">
+                      <img
+                        alt="Carlos Pérez"
+                        class="w-10 h-10 rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd8z3-BcqvS4Ip-Ms3OvFFIXh-1Hhko9hTSQqDDqdmoGsiJLSnanP1DMLSFFvLHG6HGHZnoMhdh1sN9LK_csntMUtTZDsry8z4V4gLo1P-wviAm28CMHlgQ_Hrz-N3VoIaMiIeSuXjFRy8Tk8k2vd4_smd2kg6CYIuBgc_H_8pCvKwY7YYMt4EffKcrvs5DyKQi8VXKcRzDQIZv_cQZFdIlS-jZws3QGcoCm_fuuDZwtZCkGN0UM6tACUU9iDku9h-00CMX_fc8MBc"
+                      />
+                      <div>
+                        <p class="font-semibold">Carlos Pérez</p>
+                        <div class="flex items-center text-accent">
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined fill text-sm"
+                            >star</span
+                          >
+                          <span class="material-symbols-outlined text-sm"
+                            >star</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <p class="font-body text-sm text-gray-300 leading-relaxed">
+                      Aunque el inicio es un poco lento, la recompensa vale la pena. Las
+                      últimas 300 páginas son una locura. Sanderson es un genio.
+                    </p>
+                  </article>
+                </div>
+              </div>
+
+              <div class="mt-12">
+                <h3
+                  class="text-2xl font-bold font-display border-b border-white/10 pb-2 mb-6"
+                >
+                  Libros Relacionados
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqfmJ72Vct-c7pG7ajIUSsNgYqVNcbOwyVPow0E43zhk13-WkizgaRt-ROYAs-6rfv5jspJiruIdd00q2tXNeg71QHJ4MqR-ie26KYCty3-YSMQG-y8aZPu1R2vKFVgPEet9E7VxbMNYUHje5EZsNimdcKbmoCAkKM4eHk-AhygP6WAd50qLQIBtAFVIx-BzXSqA112GmBykANBzoCYyNeJKCCvgrYTBhCWA4prfDszMcY8L0Yfda0v3P99Dz6U0IABvLlcwhFiTDl");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">El imperio final</p>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBn3zzMyQ-iIJ6ULp1gYfQcY9ccT27qKnr6wBQu5Npgdyh83gZFR0TEfzyPp-mm7tZDF1WM9pA9SBhhuf9om1linRaHbrz70I5BmzRZXciM3cySsUWHc71MdfKjKpTFVmEyeDj4vPG-JjYyEWtpmn42PptuVcnn6C_NugJ6WBBPyVY7g2cf8TslwwqG-XN96RAGGLRYazjo1URyN346T-6KQWQ6J-j9MSoPVz41tTrisW-DtT29k6g8eWESIiIMeMVJ-QCl1pWqvOO8");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">El nombre del viento</p>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBn3zzMyQ-iIJ6ULp1gYfQcY9ccT27qKnr6wBQu5Npgdyh83gZFR0TEfzyPp-mm7tZDF1WM9pA9SBhhuf9om1linRaHbrz70I5BmzRZXciM3cySsUWHc71MdfKjKpTFVmEyeDj4vPG-JjYyEWtpmn42PptuVcnn6C_NugJ6WBBPyVY7g2cf8TslwwqG-XN96RAGGLRYazjo1URyN346T-6KQWQ6J-j9MSoPVz41tTrisW-DtT29k6g8eWESIiIMeMVJ-QCl1pWqvOO8");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">El temor de un hombre sabio</p>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBu5wIhheS6pkFKb0-mB_bsK06ywg_GtrTSYWkJSEkZSq7Wa_PKAGIG7EjQ_SEinKtULJ0dp5P8LADYuOeAm7rgKmRQS_jsEteLGIyC6SVAlJ001qJFAncSQ0HlOvgAfTI7vgtqcNAS9_5m-nC46vod50yhfcgrIAbYJDB77_a-Vun5jc3ug8MziLp-gYfswoB0elol2_aalpQ45Iq6oJr9RAmA0ad-els3XpQiFHIqKhv-kUM1Dawardod7duplFB7RvVQEYsNvX7m");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">Elantris</p>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBn3zzMyQ-iIJ6ULp1gYfQcY9ccT27qKnr6wBQu5Npgdyh83gZFR0TEfzyPp-mm7tZDF1WM9pA9SBhhuf9om1linRaHbrz70I5BmzRZXciM3cySsUWHc71MdfKjKpTFVmEyeDj4vPG-JjYyEWtpmn42PptuVcnn6C_NugJ6WBBPyVY7g2cf8TslwwqG-XN96RAGGLRYazjo1URyN346T-6KQWQ6J-j9MSoPVz41tTrisW-DtT29k6g8eWESIiIMeMVJ-QCl1pWqvOO8");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">Juego de Tronos</p>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <div
+                      class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded shadow-md"
+                      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBn3zzMyQ-iIJ6ULp1gYfQcY9ccT27qKnr6wBQu5Npgdyh83gZFR0TEfzyPp-mm7tZDF1WM9pA9SBhhuf9om1linRaHbrz70I5BmzRZXciM3cySsUWHc71MdfKjKpTFVmEyeDj4vPG-JjYyEWtpmn42PptuVcnn6C_NugJ6WBBPyVY7g2cf8TslwwqG-XN96RAGGLRYazjo1URyN346T-6KQWQ6J-j9MSoPVz41tTrisW-DtT29k6g8eWESIiIMeMVJ-QCl1pWqvOO8");'
+                    ></div>
+                    <p class="text-sm font-semibold truncate">Palabras radiantes</p>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

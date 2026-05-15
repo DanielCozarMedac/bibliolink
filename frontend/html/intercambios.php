@@ -1,0 +1,142 @@
+<?php
+// 1. Iniciamos sesión y protegemos la página
+session_start();
+// Si no existe la sesión del correo, mandamos al usuario de patitas al login
+if (!isset($_SESSION["correo"])) {
+    header("location: sesion/login.php");
+    exit();
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require "sesion/conexion.php";
+?>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intercambios BiblioLink - Encuentra libros cerca de ti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Merriweather', serif;
+        }
+        h1, h2, h3, h4, h5, h6, button, a, input, label, textarea, select {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-[#F5F6F8] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+    <div class="w-full flex flex-1 justify-center">
+    <div class="layout-content-container flex flex-col w-full">
+    <header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-4 border-b border-solid border-[#E0E2E7] dark:border-[#1E2A38]/50 bg-white dark:bg-[#1E2A38]">
+        <div class="flex items-center gap-4 text-[#1E2A38] dark:text-white">
+        <div class="text-[#46C4B2] w-8 h-8 flex items-center justify-center">
+        <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+        </div>
+        <h2 class="text-xl font-bold leading-tight tracking-tight">BiblioLink</h2>
+        </div>
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="inicio.php">Inicio</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.php">Comunidad</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="../../backend/php/index.php">Intercambios</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="chat.php">Chats</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="suscripcion.php">Suscripciones</a>
+            <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.php">Contacto</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../../backend/php/perfil.php" class="flex items-center justify-center gap-2 rounded-full border border-[#46C4B2] px-5 py-2 text-sm font-medium hover:bg-[#46C4B2] hover:text-white transition-colors">
+                Mi Perfil
+            </a>
+        </div>
+    </header>
+    <main class="w-full flex-grow px-4 sm:px-10 py-8">
+        <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#1E2A38] dark:text-white">Encuentra tu próxima lectura</h1>
+        <p class="mt-2 text-lg text-gray-600 dark:text-gray-400 font-['Merriweather']">Explora los libros que hay disponibles ya sea oficial o para intercambios con otros usuarios.</p>
+        </div>
+        <div class="bg-white dark:bg-[#1E2A38] p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-white/10 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+        <div class="relative">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="search-book">Buscar libro</label>
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 mt-3">search</span>
+        <input class="w-full h-11 pl-10 pr-4 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="search-book" placeholder="Título, autor..." type="search"/>
+        </div>
+        <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="genre">Género</label>
+        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="genre">
+            <option>Todos los géneros</option>
+            <option>Fantasía</option>
+            <option>Ciencia Ficción</option>
+            <option>Misterio</option>
+            <option>Novela Histórica</option>
+        </select>
+        </div>
+        <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="condition">Condición</label>
+        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="condition">
+            <option>Cualquier condición</option>
+            <option>Como nuevo</option>
+            <option>Buen estado</option>
+            <option>Aceptable</option>
+        </select>
+        </div>
+        <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="offer-type">Tipo de oferta</label>
+        <select class="w-full h-11 px-3 rounded-lg border border-gray-200 dark:border-white/20 bg-gray-50 dark:bg-white/5 focus:ring-2 focus:ring-[#46C4B2] focus:outline-none transition-shadow" id="offer-type">
+            <option>Intercambio o Regalo</option>
+            <option>Solo Intercambio</option>
+            <option>Solo Regalo</option>
+        </select>
+        </div>
+        </div>
+        </div>
+        <h2>No hay ningún libro publicado todavía</h2>
+    </main>
+    <footer class="bg-[#1E2A38] text-white w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-10 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-1">
+        <div class="flex items-center gap-3">
+        <div class="text-[#46C4B2] w-8 h-8 flex items-center justify-center">
+        <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+        </div>
+        <h2 class="text-xl font-bold">BiblioLink</h2>
+        </div>
+        <p class="mt-4 text-sm text-white/70">Conectando lectores, un libro a la vez.</p>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Legal</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Política de Privacidad</a></li>
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Términos de Servicio</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Redes Sociales</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Facebook</a></li>
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Twitter</a></li>
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Instagram</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Contacto</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a class="hover:text-[#46C4B2] transition-colors" href="mailto:hola@bibliolink.com">hola@bibliolink.com</a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="border-t border-white/20 py-4 text-center">
+            <p class="text-sm text-white/50">© 2024 BiblioLink. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </div>
+    </div>
+    </div>
+    </div>
+</body></html>

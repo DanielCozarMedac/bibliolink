@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BiblioLink Premium - Desbloquea tu experiencia de lectura</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Merriweather', serif;
+        }
+        h1, h2, h3, h4, h5, h6, button, a, input, label, textarea, select {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-[#F5F6F8] dark:bg-[#1E2A38] text-[#1E2A38] dark:text-[#F5F6F8]">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+    <div class="w-full flex flex-1 justify-center">
+    <div class="layout-content-container flex flex-col w-full max-w-6xl">
+    <header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-4 border-b border-solid border-[#E0E2E7] dark:border-[#1E2A38]/50 bg-white dark:bg-[#1E2A38]">
+    <div class="flex items-center gap-4 text-[#1E2A38] dark:text-white">
+    <div class="text-[#46C4B2] w-8 h-8 flex items-center justify-center">
+    <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+    </div>
+    <h2 class="text-xl font-bold leading-tight tracking-tight">BiblioLink</h2>
+    </div>
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-9">
+        <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="inicio.html">Inicio</a>
+        <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="comunidad.html">Comunidad</a>
+        <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="intercambios.html">Intercambios</a>
+        <a class="text-sm font-bold leading-normal text-[#46C4B2] transition-colors" href="suscripcion.html">Suscripciones</a>
+        <a class="text-sm font-medium leading-normal hover:text-[#46C4B2] transition-colors" href="contacto.html">Contacto</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#46C4B2] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors">
+            <span class="truncate" href="../../backend/php/sesion/registro.php">Registrarse</span>
+        </button>
+         <button class=" border-white flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 text-black dark:text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#3da999] hover:text-white transition-colors">
+            <span class="truncate" href="../../backend/php/sesion/login.php">Iniciar Sesión</span>
+        </button>
+    </div>
+    </header>
+    <main class="w-full flex-grow">
+    <section class="bg-white dark:bg-[#1E2A38] text-center px-4 sm:px-10 py-16 sm:py-24">
+        <h1 class="text-4xl md:text-5xl font-bold text-[#1E2A38] dark:text-white">Hazte Premium y lleva tu amor por los libros al siguiente nivel</h1>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-400 font-['Merriweather']">Disfruta de beneficios exclusivos, intercambios ilimitados y una experiencia sin interrupciones. Con BiblioLink Premium, conectas más y mejor con otros lectores.</p>
+        <div class="mt-8 flex justify-center gap-4">
+            <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-[#46C4B2] text-white text-base font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors" href="#plans">Ver Planes</a>
+        </div>
+    </section>
+    <section class="px-4 sm:px-10 py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12 text-[#1E2A38] dark:text-white">Compara nuestros planes</h2>
+    <div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+        <thead>
+        <tr>
+            <th class="p-4 text-lg font-bold border-b-2 border-gray-200 dark:border-white/20">Característica</th>
+            <th class="p-4 text-center text-lg font-bold border-b-2 border-gray-200 dark:border-white/20 bg-gray-100 dark:bg-white/5 rounded-t-lg">Gratis</th>
+            <th class="p-4 text-center text-lg font-bold border-b-2 border-[#46C4B2] dark:border-[#46C4B2] bg-[#46C4B2]/10 dark:bg-[#46C4B2]/20 rounded-t-lg">Premium</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr class="border-b border-gray-200 dark:border-white/10">
+        <td class="p-4 font-['Merriweather']">Reseñas de libros</td>
+        <td class="p-4 text-center font-['Merriweather']">Hasta 5 al mes</td>
+        <td class="p-4 text-center font-bold text-[#46C4B2] font-['Merriweather']">Ilimitadas</td>
+    </tr>
+    <tr class="border-b border-gray-200 dark:border-white/10">
+        <td class="p-4 font-['Merriweather']">Propuestas de intercambio</td>
+        <td class="p-4 text-center font-['Merriweather']">Hasta 3 al mes</td>
+        <td class="p-4 text-center font-bold text-[#46C4B2] font-['Merriweather']">Ilimitadas</td>
+    </tr>
+    <tr class="border-b border-gray-200 dark:border-white/10">
+        <td class="p-4 font-['Merriweather']">Experiencia sin anuncios</td>
+        <td class="p-4 text-center text-red-500"><span class="material-symbols-outlined align-middle">close</span></td>
+        <td class="p-4 text-center text-[#46C4B2]"><span class="material-symbols-outlined align-middle font-bold">check_circle</span></td>
+    </tr>
+    <tr class="border-b border-gray-200 dark:border-white/10">
+        <td class="p-4 font-['Merriweather']">Soporte al usuario</td>
+        <td class="p-4 text-center font-['Merriweather']">Estándar</td>
+        <td class="p-4 text-center font-bold text-[#46C4B2] font-['Merriweather']">Prioritario</td>
+    </tr>
+    <tr class="border-b border-gray-200 dark:border-white/10">
+        <td class="p-4 font-['Merriweather']">Acceso a eventos exclusivos</td>
+        <td class="p-4 text-center text-red-500"><span class="material-symbols-outlined align-middle">close</span></td>
+        <td class="p-4 text-center text-[#46C4B2]"><span class="material-symbols-outlined align-middle font-bold">check_circle</span></td>
+    </tr>
+    <tr>
+        <td class="p-4 font-['Merriweather']">Insignia de perfil Premium</td>
+        <td class="p-4 text-center text-red-500"><span class="material-symbols-outlined align-middle">close</span></td>
+        <td class="p-4 text-center text-[#46C4B2]"><span class="material-symbols-outlined align-middle font-bold">check_circle</span></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </section>
+    <section class="bg-white dark:bg-[#1E2A38] px-4 sm:px-10 py-16 sm:py-20" id="plans">
+    <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-[#1E2A38] dark:text-white">Elige tu plan</h2>
+    <p class="mt-2 text-lg text-gray-600 dark:text-gray-400 font-['Merriweather']">Selecciona la suscripción que mejor se adapte a ti y empieza a disfrutar.</p>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="border border-gray-200 dark:border-white/20 rounded-lg p-8 text-center flex flex-col">
+    <h3 class="text-2xl font-bold">Mensual</h3>
+    <p class="mt-4 text-4xl font-bold">3,99€ <span class="text-base font-medium text-gray-500 dark:text-gray-400">/mes</span></p>
+    <p class="mt-4 text-gray-600 dark:text-gray-300 font-['Merriweather'] flex-grow">Perfecto para probar todos los beneficios de Premium sin compromiso.</p>
+    <button class="mt-8 w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-11 px-6 bg-gray-200 dark:bg-white/10 text-[#1E2A38] dark:text-white text-sm font-bold leading-normal tracking-wide hover:bg-gray-300 dark:hover:bg-white/20 transition-colors">
+        <span class="truncate">Suscribirme ahora</span>
+    </button>
+    </div>
+    <div class="border-2 border-[#46C4B2] rounded-lg p-8 text-center relative flex flex-col">
+    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#46C4B2] text-white text-xs font-bold px-3 py-1 rounded-full">MÁS POPULAR</span>
+    <h3 class="text-2xl font-bold">Anual</h3>
+    <p class="mt-4 text-4xl font-bold">35€ <span class="text-base font-medium text-gray-500 dark:text-gray-400">/año</span></p>
+    <p class="mt-4 text-gray-600 dark:text-gray-300 font-['Merriweather'] flex-grow">Ahorra un 25% y disfruta de un año completo de lectura sin límites.</p>
+    <button class="mt-8 w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-11 px-6 bg-[#46C4B2] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#3da999] transition-colors">
+        <span class="truncate">Suscribirme ahora</span>
+    </button>
+    </div>
+    </div>
+    </div>
+    </section>
+    <section class="px-4 sm:px-10 py-16 sm:py-20">
+        <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-[#1E2A38] dark:text-white">Lo que dicen nuestros miembros Premium</h2>
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        <div class="bg-white dark:bg-[#1E2A38] p-6 rounded-lg shadow-sm border border-gray-200 dark:border-white/10">
+        <p class="font-['Merriweather'] text-[#1E2A38]/90 dark:text-[#F5F6F8]/90">"Ser Premium ha cambiado mi forma de usar BiblioLink. Los intercambios ilimitados me han permitido descubrir libros increíbles y he conocido a gente maravillosa en los eventos exclusivos."</p>
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex items-center gap-3">
+        <img class="w-10 h-10 rounded-full" data-alt="Avatar de Elena Ríos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoUit5eJ_BQ5OeYevsG1ZM5BEOFSer58R4fRIGWgaFLxWb8frhONhyDrJNEP3kA6kcVBZpukphOZpR7kydhrqdm8zEmaC1D9V08hGQBWyovUdDyfmhV7sUdI5BE7ne6ZnJW2p2tVUWRS2a5W74O5s9A-w21OTusTZ2HJ0kgD6v2C7vafW_k04lYrZMnIwiQ8gBRE9ejjtKGhwDtjYrEAWLksxFLB7cRRkGaKoVTfSK8A8NmMrG44ALh6wQES4SaBsTMLg2zYKfbDvQ"/>
+        <div>
+        <p class="font-bold">Elena Ríos</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Lectora apasionada</p>
+        </div>
+        </div>
+        </div>
+        <div class="bg-white dark:bg-[#1E2A38] p-6 rounded-lg shadow-sm border border-gray-200 dark:border-white/10">
+        <p class="font-['Merriweather'] text-[#1E2A38]/90 dark:text-[#F5F6F8]/90">"El soporte prioritario es fantástico. Tuve una duda y me respondieron en minutos. Además, la insignia de perfil le da un toque especial a mi biblioteca. ¡Totalmente recomendado!"</p>
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex items-center gap-3">
+        <img class="w-10 h-10 rounded-full" data-alt="Avatar de Javier Solís" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu5rmuSf9ZjodhVl0LJ3sRgOIHbFViGy9YczN3wF9zH1Lfxgo1GG7w89K3XTiUhcN1Q0-gboO7NNMTaGKyDV2hQ57rJYD7zQtyUQQZIm6iTxVa2uQeMW9FN3g6gOvUON0ChR12o3Echr2f4jcJz1iuqfmT91GevDhN2_VgEnmNJ68T04qeo1kOeUiGiqTZHUmkAHHnNEy7SIFC-rjWvyzDZPEtN359HQGJPQMGHDT77llgHJ_r_GMgJMTjmTZjqmh_WLetk1ePBCP2"/>
+        <div>
+        <p class="font-bold">Javier Solís</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Coleccionista de clásicos</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <section class="bg-white dark:bg-[#1E2A38] px-4 sm:px-10 py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12 text-[#1E2A38] dark:text-white">Preguntas Frecuentes</h2>
+    </div>
+    </section>
+    <div class="divide-y divide-slate-100">        
+        <div class="relative overflow-hidden group">
+            <input type="checkbox" id="item1" class="peer absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer">            
+            <label for="item1" class="flex items-center justify-between p-6 transition-colors duration-300 peer-checked:bg-indigo-50/30">
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-lg">¿Puedo cancelar mi suscripción en cualquier momento?</span>
+                </div>
+                <span class="material-symbols-outlined transition-transform duration-500 peer-checked:rotate-180 text-slate-400">expand_more</span>
+            </label>
+                <div class="max-h-0 peer-checked:max-h-60 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="mt-1 text-gray-600 dark:text-gray-300 font-['Merriweather']">
+                        Sí, puedes cancelar tu suscripción Premium cuando quieras desde la configuración de tu perfil. Seguirás disfrutando de los beneficios hasta el final de tu ciclo de facturación actual.
+                    </div>
+                </div>
+        </div> 
+            <div class="relative overflow-hidden group">
+                <input type="checkbox" id="item2" class="peer absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" checked>            
+                    <label for="item2" class="flex items-center justify-between p-6 transition-colors duration-300 peer-checked:bg-indigo-50/30">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-lg">¿Qué métodos de pago aceptan?</span>
+                        </div>
+                        <span class="material-symbols-outlined transition-transform duration-500 peer-checked:rotate-180 text-slate-400">expand_more</span>
+                    </label>
+
+                    <div class="max-h-0 peer-checked:max-h-60 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="mt-1 text-gray-600 dark:text-gray-300 font-['Merriweather']">
+                            Aceptamos las principales tarjetas de crédito y débito (Visa, MasterCard, American Express) y también pagos a través de PayPal para tu comodidad.
+                        </div>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden group">
+                    <input type="checkbox" id="item3" class="peer absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer">
+                    
+                    <label for="item3" class="flex items-center justify-between p-6 transition-colors duration-300 peer-checked:bg-indigo-50/30">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-lg">¿Qué son los eventos exclusivos para miembros Premium?</span>
+                        </div>
+                        <span class="material-symbols-outlined transition-transform duration-500 peer-checked:rotate-180 text-slate-400">expand_more</span>
+                    </label>
+
+                    <div class="max-h-0 peer-checked:max-h-60 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="mt-1 text-gray-600 dark:text-gray-300 font-['Merriweather']">
+                            Son encuentros online y presenciales, como clubs de lectura con autores, talleres de escritura o charlas exclusivas, a los que solo los miembros Premium tienen acceso.
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <footer class="bg-[#1E2A38] text-white w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-10 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-1">
+        <div class="flex items-center gap-3">
+        <div class="text-[#46C4B2] w-8 h-8 flex items-center justify-center">
+        <span class="material-symbols-outlined !text-3xl">import_contacts</span>
+        </div>
+        <h2 class="text-xl font-bold">BiblioLink</h2>
+        </div>
+        <p class="mt-4 text-sm text-white/70">Conectando lectores, un libro a la vez.</p>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Legal</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Política de Privacidad</a></li>
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Términos de Servicio</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Redes Sociales</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Facebook</a></li>
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Twitter</a></li>
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="#">Instagram</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="font-bold tracking-wide">Contacto</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+        <li><a class="hover:text-[#46C4B2] transition-colors" href="mailto:hola@bibliolink.com">hola@bibliolink.com</a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="border-t border-white/20 py-4 text-center">
+        <p class="text-sm text-white/50">© 2024 BiblioLink. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
